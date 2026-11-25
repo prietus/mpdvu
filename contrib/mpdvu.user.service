@@ -1,0 +1,12 @@
+# For an MPD that runs as a user service (systemctl --user): copy to
+# ~/.config/systemd/user/mpdvu.service and enable it the same way.
+[Unit]
+Description=Levels of what MPD is playing, for a VU meter
+After=mpd.service
+
+[Service]
+ExecStart=/usr/local/bin/mpdvu --fifo /tmp/mpd.fifo --format 44100:16:2
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

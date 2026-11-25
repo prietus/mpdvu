@@ -39,6 +39,21 @@ sudo systemctl enable --now mpdvu
 
 It has no dependencies besides Rust's standard library.
 
+Where MPD runs as a user service (`systemctl --user`), use the user unit
+instead:
+
+```sh
+install -Dm644 contrib/mpdvu.user.service ~/.config/systemd/user/mpdvu.service
+systemctl --user enable --now mpdvu
+```
+
+To build on another machine for an x86_64 server, as a static binary:
+
+```sh
+rustup target add x86_64-unknown-linux-musl
+RUSTFLAGS="-C linker=rust-lld" cargo build --release --target x86_64-unknown-linux-musl
+```
+
 ## Options
 
 | Option | Default | |
