@@ -1,0 +1,15 @@
+[Unit]
+Description=Levels of what MPD is playing, for a VU meter
+After=mpd.service
+
+[Service]
+ExecStart=/usr/local/bin/mpdvu --fifo /tmp/mpd.fifo --format 44100:16:2
+Restart=on-failure
+# It only reads a fifo and talks UDP.
+DynamicUser=yes
+ProtectSystem=strict
+ProtectHome=yes
+NoNewPrivileges=yes
+
+[Install]
+WantedBy=multi-user.target
