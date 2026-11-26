@@ -12,6 +12,12 @@ loud each band of frequencies is. The audio itself never leaves the server.
 
 Made for the MPD card of [hasklets](https://github.com/prietus/hasklets).
 
+
+
+https://github.com/user-attachments/assets/b80cb952-6afe-42d2-a0f4-decdcc947ec3
+
+
+
 ## Setting it up
 
 On the machine MPD runs on, add an output to `mpd.conf` and restart MPD:
