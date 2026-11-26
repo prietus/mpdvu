@@ -1,6 +1,6 @@
 [package]
 name = "mpdvu"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2024"
 description = "Levels of what MPD is playing, sent over the network for a VU meter"
 license = "MIT"

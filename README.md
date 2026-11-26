@@ -7,7 +7,8 @@ MPD's audio for visualizers comes out of a `fifo` output: a pipe on the
 server's own disk, which only a program on that machine can read. mpdvu is
 that program. It reads the pipe, works out the peak and the RMS level of each
 channel some 25 times a second, and sends just those numbers over UDP to
-whoever asks. The audio itself never leaves the server.
+whoever asks; and, for those who want a spectrum instead of a VU meter, how
+loud each band of frequencies is. The audio itself never leaves the server.
 
 Made for the MPD card of [hasklets](https://github.com/prietus/hasklets).
 
@@ -78,7 +79,20 @@ receives
 mpdvu 1 <sequence> <peak> <rms> [<peak> <rms> ...]
 ```
 
-with a pair per channel, linear, from 0 to 1. To try it by hand:
+with a pair per channel, linear, from 0 to 1.
+
+A client that asks with `mpdvu 1 subscribe bands` also receives the spectrum
+(since 0.2.0):
+
+```
+mpdvu-bands 1 <sequence> <level> <level> ...
+```
+
+28 bands, low notes first, as wide as each other to the ear, from 45 Hz to
+16 kHz; each from 0 to 1 on a scale of decibels (-54 dB to -6 dB), ready to
+be drawn as bars. The spectrum is only worked out while somebody asks for it.
+
+To try it by hand:
 
 ```sh
 echo 'mpdvu 1 subscribe' | nc -u server 6601
